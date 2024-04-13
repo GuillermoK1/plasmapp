@@ -14,7 +14,7 @@
     <PlasmaBall/>
   </div>
 
-  <div class="z-30 flex flex-col place-items-baseline justify-center m-10 ring-8 ring-offset-purple-100/[.15]">
+  <div class="mr-6 z-30 flex flex-col place-items-baseline justify-center m-6 ring-8 ring-offset-purple-100/[.15]">
       <NuxtPage class="flex place-items-baseline justify-center"/>
     </div>
 

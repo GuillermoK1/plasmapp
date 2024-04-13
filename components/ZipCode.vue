@@ -20,7 +20,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { useCookie } from 'nuxt';
+import { useCookie } from '#app';
 
 const zipCodeLength = 5; // Ajusta esto según la longitud deseada del código postal
 const zipCodeDigits = ref(Array(zipCodeLength).fill(''));

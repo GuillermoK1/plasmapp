@@ -20,7 +20,9 @@ const items = [{
 
 <template class="flex flex-col">
 
-    <BreadCrumb/>
+    <h2 class="m-2 p-2 font-bold text-neutral-800 bg-gradient-to-r from-sky-700 to-indigo-600 z-10 opacity-85">
+      Resultados de búsqueda, empresas cercanas que oferecen ese servicio:
+    </h2>
     <UCarousel v-slot="{ item, index }" :items="items" :ui="{ item: 'w-full' }">
       <div class="text-center mx-auto">
         <img :src="item.avatar.src" :alt="item.name" class="rounded-full w-48 h-48 mb-2" draggable="false">
