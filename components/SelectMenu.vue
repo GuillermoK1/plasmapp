@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const serviceList =
-['Limpieza', 'Mudanza', 'Pintura', 'Recogida de escombros', 'Reparaciones express', 'Manitas', 'Instalación de muebles', 'Cuidado de mascotas']
+['Limpieza', 'Mudanza', 'Pintura', 'Recogida de escombros',
+ 'Reparaciones express', 'Manitas', 'Instalación de muebles',
+  'Cuidado de mascotas', 'Fontaneria', 'Peluqueria', 'Cuidado de personas']
 
 const selected = ref(serviceList[0])
 const value = ref('')
