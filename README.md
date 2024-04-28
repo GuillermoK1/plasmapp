@@ -7,3 +7,4 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 Usuarios de tipo 1 (empresas), se registran rellenando un formulario sencillo.
 
 Los usuarios clientes no requieren ser registrados, pueden directamente buscar el servicio que necesitan de la lista de servicios e introducir el código postal para dar prioridad a las empresas cercanas. Escoger la empresa de preferencia y contactar por medios externos (e-mail, tlfno, red social).
+![A](https://github.com/GuillermoK1/plasmapp/assets/139216670/ad71fea4-b780-44cd-9971-e42200627fdf)
