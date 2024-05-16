@@ -4,18 +4,6 @@ const route = useRoute()
 const links = [{
   label: 'Formulario de trabajadores.',
     src: 'localhost:3000/workerForm',
-}, {
-  label: 'Installation',
-  icon: 'i-heroicons-home',
-  to: '/getting-started/installation'
-}, {
-  label: 'Horizontal Navigation',
-  icon: 'i-heroicons-chart-bar',
-  to: `${route.path.startsWith('/dev') ? '/dev' : ''}/components/horizontal-navigation`
-}, {
-  label: 'Command Palette',
-  icon: 'i-heroicons-command-line',
-  to: '/components/command-palette'
 }]
 </script>
 
