@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
+// Definimos los servicios disponibles y su estado (seleccionado o no)
 const services = ref({
   Limpieza: false,
   Mudanza: false,
@@ -21,12 +22,13 @@ const services = ref({
   CuidadoDePersonas: false
 });
 
+// Emitimos el evento 'update:services' cuando cambian los servicios seleccionados
 const emits = defineEmits(['update:services']);
-
 watch(services, (newVal) => {
   emits('update:services', newVal);
 }, { deep: true });
 
+// Formateamos el nombre del servicio para mostrarlo adecuadamente
 function formatServiceName(serviceName: string) {
   return serviceName.match(/[A-Z][a-z]+|[0-9]+/g)?.join(' ');
 }
