@@ -1,11 +1,12 @@
-import { _slow } from "#tailwind-config/theme/animation"
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { _slow } from "#tailwind-config/theme/animation"
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxt/ui',
     '@nuxtjs/tailwindcss'
-],
+  ],
   app: {
     head: {
       charset: 'utf-8',
@@ -31,5 +32,21 @@ export default defineNuxtConfig({
           }
         }
     }
+  },
+  nitro: {
+    preset: 'node-server'
+  },
+  build: {
+    transpile: ['@oracledb']
+  },
+  runtimeConfig: {
+    public: {
+      // Public runtime config, accessible on both server and client
+      GEOCODE_API_KEY: process.env.GEOCODE_API_KEY,
+    },
+    // Private runtime config, only accessible on the server
+    DB_USER: process.env.DB_USER,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_CONNECTION_STRING: process.env.DB_CONNECTION_STRING,
   }
-})
+});

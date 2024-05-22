@@ -14,8 +14,14 @@
     "@nuxt/ui": "^2.14.2",
     "axios": "^1.6.8",
     "cookie-universal-nuxt": "^2.2.2",
+    "geolib": "^3.3.4",
+    "h3": "^1.11.1",
     "nuxt": "^3.10.3",
+    "oracledb": "^6.5.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/oracledb": "^6.4.1"
   }
 }
