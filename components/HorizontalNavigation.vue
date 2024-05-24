@@ -1,9 +1,8 @@
 <script setup lang="ts">
-const route = useRoute()
-
 const links = [{
   label: 'Formulario de trabajadores.',
-    src: 'localhost:3000/workerForm',
+  to: '/workerForm'
+
 }]
 </script>
 
