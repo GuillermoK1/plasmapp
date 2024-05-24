@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
     // Calcular la distancia de cada empresa al cliente
     const companiesWithDistance = companies.map((company: Company) => {
         const distance = geolib.getDistance(
-            { latitude: clientCoords.lat, longitude: clientCoords.lon },
+            { latitude: clientCoords.lat, longitude: clientCoords.lng },
             { latitude: company.geoCoords.lat, longitude: company.geoCoords.lon }
         );
         return { ...company, distance };

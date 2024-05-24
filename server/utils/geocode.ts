@@ -1,11 +1,23 @@
 import axios from 'axios';
 
-export const geocode = async (postalCode: string) => {
-    const apiKey = process.env.GEOCODE_API_KEY;
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${postalCode}|country:ES&key=${apiKey}`);
-    
-    if (response.data && response.data.coordinates) {
-        return response.data.coordinates;
+interface GeocodeResponse {
+    results: Array<{
+        geometry: {
+            location: {
+                lat: number;
+                lng: number;
+            };
+        };
+    }>;
+    status: string;
+}
+
+export const geocode = async (postalCode: string): Promise<{ lat: number; lng: number }> => {
+    const API_KEY = process.env.API_KEY;
+    const response = await axios.get<GeocodeResponse>(`https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:${postalCode}|country:ES&key=${API_KEY}`);
+    if (response.data && response.data.status === 'OK' && response.data.results.length > 0) {
+        const location = response.data.results[0].geometry.location;
+        return { lat: location.lat, lng: location.lng };
     } else {
         throw new Error('Error al obtener las coordenadas geográficas');
     }

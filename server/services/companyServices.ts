@@ -7,6 +7,7 @@ interface Company {
     services: string;
     description: string;
     email: string;
+    zip: string;
 }
 
 export const saveCompany = async (province: string, company: Company) => {
@@ -14,8 +15,8 @@ export const saveCompany = async (province: string, company: Company) => {
     const tableName = `province_${province}`;
 
     const query = `
-        INSERT INTO ${tableName} (GEOCOORD, NAME, SERVICES, DESCRIPTION, EMAIL)
-        VALUES (:geoCoords, :name, :services, :description, :email)
+        INSERT INTO ${tableName} (GEOCOORD, NAME, SERVICES, DESCRIPTION, EMAIL, ZIP)
+        VALUES (:geoCoords, :name, :services, :description, :email, :zip)
     `;
     
     const params = {
@@ -23,7 +24,8 @@ export const saveCompany = async (province: string, company: Company) => {
         name: company.name,
         services: company.services,
         description: company.description,
-        email: company.email
+        email: company.email,
+        zip: company.zip
     };
 
     await db.execute(query, params, { autoCommit: true });
