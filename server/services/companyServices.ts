@@ -37,7 +37,7 @@ export const searchCompanies = async (province: string, service: string) => {
     const tableName = `province_${province}`;
 
     const query = `
-        SELECT GEOCOORD, NAME, SERVICES, DESCRIPTION, EMAIL
+        SELECT GEOCOORD, NAME, SERVICES, DESCRIPTION, EMAIL, ZIP
         FROM ${tableName}
         WHERE SERVICES LIKE :service
     `;
@@ -57,5 +57,5 @@ export const searchCompanies = async (province: string, service: string) => {
         services: JSON.parse(row.SERVICES),
         description: row.DESCRIPTION,
         email: row.EMAIL
-    }));
+    }));    
 };
