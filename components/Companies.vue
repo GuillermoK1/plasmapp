@@ -1,36 +1,69 @@
-<script setup lang="ts">
-const items = [{
-  name: 'Sébastien Chopin',
-  to: 'https://github.com/Atinux',
-  avatar: { src: 'https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/atinux' }
-}, {
-  name: 'Pooya Parsa',
-  to: 'https://github.com/pi0',
-  avatar: { src: 'https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/pi0' }
-}, {
-  name: 'Daniel Roe',
-  to: 'https://github.com/danielroe',
-  avatar: { src: 'https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/danielroe' }
-}, {
-  name: 'Anthony Fu',
-  to: 'https://github.com/antfu',
-  avatar: { src: 'https://ipx.nuxt.com/f_auto,s_192x192/gh_avatar/antfu' }
-}]
-</script>
-
-<template class="flex flex-col">
-
-    <h2 class="m-2 p-2 font-bold text-neutral-800 bg-gradient-to-r from-sky-700 to-indigo-600 z-10 opacity-85">
-      Resultados de búsqueda, empresas cercanas que oferecen ese servicio:
+<template>
+  <div class="companies-container m-4 p-4">
+    <h2 class="font-bold text-neutral-800 bg-gradient-to-r from-sky-700 to-indigo-600 p-2 z-10 opacity-85">
+      Empresas cercanas
     </h2>
-    <UCarousel v-slot="{ item, index }" :items="items" :ui="{ item: 'w-full' }">
-      <div class="text-center mx-auto">
-        <img :src="item.avatar.src" :alt="item.name" class="rounded-full w-48 h-48 mb-2" draggable="false">
-
-        <p class="font-semibold">
-          {{ index + 1 }}. {{ item.name }}
-        </p>
-      </div>
+    <UCarousel :items="companies" :autoplay="false" class="my-4">
+      <template #item="{ item }">
+        <div class="company-card p-4 bg-white shadow-md rounded-lg">
+          <h3 class="font-bold text-xl">{{ item.name }}</h3>
+          <p class="text-gray-700">{{ item.description }}</p>
+          <p class="text-gray-500">Servicios: {{ item.services.join(', ') }}</p>
+          <p class="text-gray-500">Correo: {{ item.email }}</p>
+          <p class="text-gray-500">Distancia: {{ item.distance }} metros</p>
+        </div>
+      </template>
     </UCarousel>
+  </div>
 </template>
 
+<script setup lang="ts">
+
+interface Company {
+    geoCoords: string;
+    name: string;
+    services: string;
+    description: string;
+    email: string;
+    zip: string;
+}
+
+const companies = ref<Company[]>([]);
+
+const fetchCompanies = async () => {
+  const service = useState('selectedService').value || 'Limpieza';
+  const postalCode = useCookie('zipCode').value || '00000';
+
+  const { data, error } = await useFetch(`/api/companies/search?service=${service}&postalCode=${postalCode}`);
+
+  if (error.value) {
+    console.error('Error fetching companies:', error.value);
+  } else if (data.value) {
+    companies.value = data.value.map((company: any) => ({
+      name: company.name,
+      description: company.description,
+      services: company.services,
+      email: company.email,
+      distance: company.distance,
+      geoCoords: company.geoCoords,
+      zip: company.zip,
+    }));
+  }
+};
+
+onMounted(() => {
+  fetchCompanies();
+});
+</script>
+
+<style scoped>
+.companies-container {
+  background-color: #f7fafc;
+  border-radius: 8px;
+}
+
+.company-card {
+  width: 250px;
+  height: 200px;
+}
+</style>

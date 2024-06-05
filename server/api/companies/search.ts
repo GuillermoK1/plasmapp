@@ -11,7 +11,7 @@ type QueryParams = {
 
 // Define type for company
 type Company = {
-    geoCoords: { lat: number; lon: number };
+    geoCoords: string;
     // Add other properties of Company as needed
     [key: string]: any;
 };
@@ -19,6 +19,7 @@ type Company = {
 export default defineEventHandler(async (event) => {
     const query = getQuery(event) as QueryParams;
     const { service, postalCode } = query;
+    console.log('query: ', query);
 
     if (!service || !postalCode) {
         throw new Error('Service and postalCode are required.');
@@ -26,24 +27,30 @@ export default defineEventHandler(async (event) => {
 
     // Convertir código postal a coordenadas geográficas del cliente
     const clientCoords = await geocode(postalCode);
+    console.log('clientCoords: ', clientCoords);
+    if (!clientCoords) {
+        throw new Error("Failed to convert postal code to geographic coordinates");
+      }
 
     // Extraer la provincia de los dos primeros dígitos del código postal
     const province = postalCode.substring(0, 2);
+    console.log('province: ', province);
 
     // Buscar empresas en la base de datos
     const companies = await searchCompanies(province, service);
 
     // Calcular la distancia de cada empresa al cliente
     const companiesWithDistance = companies.map((company: Company) => {
+        const companyCoords = JSON.parse(company.geoCoords); // Parsear geoCoords
         const distance = geolib.getDistance(
             { latitude: clientCoords.lat, longitude: clientCoords.lng },
-            { latitude: company.geoCoords.lat, longitude: company.geoCoords.lon }
+            { latitude: companyCoords.lat, longitude: companyCoords.lng }
         );
         return { ...company, distance };
     });
 
     // Ordenar empresas por distancia
     companiesWithDistance.sort((a: Company, b: Company) => a.distance - b.distance);
-
+    console.log('companiesWithDistance: ', companiesWithDistance);
     return companiesWithDistance;
 });

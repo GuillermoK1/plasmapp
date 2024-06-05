@@ -9,7 +9,7 @@ interface Company {
     email: string;
     zip: string;
 }
-
+//The creating service
 export const saveCompany = async (province: string, company: Company) => {
     const db = await getDBConnection();
     const tableName = `province_${province}`;
@@ -31,7 +31,7 @@ export const saveCompany = async (province: string, company: Company) => {
     await db.execute(query, params, { autoCommit: true });
     await db.close();
 };
-
+//The searching service
 export const searchCompanies = async (province: string, service: string) => {
     const db = await getDBConnection();
     const tableName = `province_${province}`;
@@ -56,6 +56,7 @@ export const searchCompanies = async (province: string, service: string) => {
         name: row.NAME,
         services: JSON.parse(row.SERVICES),
         description: row.DESCRIPTION,
-        email: row.EMAIL
+        email: row.EMAIL,
+        zip: row.ZIP
     }));    
 };
