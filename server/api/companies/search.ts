@@ -9,11 +9,17 @@ type QueryParams = {
     postalCode?: string;
 };
 
-// Define type for company
-type Company = {
-    geoCoords: string;
-    // Add other properties of Company as needed
-    [key: string]: any;
+interface Company {
+    geoCoords: {lat: number, lng: number};
+    name: string;
+    services: object;
+    description: string;
+    email: string;
+    zip: string;
+  }
+
+type company = {
+    distance: number
 };
 
 export default defineEventHandler(async (event) => {
@@ -41,7 +47,7 @@ export default defineEventHandler(async (event) => {
 
     // Calcular la distancia de cada empresa al cliente
     const companiesWithDistance = companies.map((company: Company) => {
-        const companyCoords = JSON.parse(company.geoCoords); // Parsear geoCoords
+        const companyCoords = (company.geoCoords); // Parsear geoCoords
         const distance = geolib.getDistance(
             { latitude: clientCoords.lat, longitude: clientCoords.lng },
             { latitude: companyCoords.lat, longitude: companyCoords.lng }
@@ -50,7 +56,7 @@ export default defineEventHandler(async (event) => {
     });
 
     // Ordenar empresas por distancia
-    companiesWithDistance.sort((a: Company, b: Company) => a.distance - b.distance);
+    companiesWithDistance.sort((a: company, b:company) => a.distance - b.distance);
     console.log('companiesWithDistance: ', companiesWithDistance);
     return companiesWithDistance;
 });

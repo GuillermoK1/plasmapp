@@ -2,9 +2,9 @@ import { getDBConnection } from '../utils/db';
 import oracledb from 'oracledb';
 
 interface Company {
-    geoCoords: string;
+    geoCoords: object;
     name: string;
-    services: string;
+    services: object;
     description: string;
     email: string;
     zip: string;

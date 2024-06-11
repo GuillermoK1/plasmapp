@@ -3,9 +3,9 @@ import { geocode } from '../../utils/geocode';
 import { saveCompany } from '../../services/companyServices';
 
 interface Company {
-  geoCoords: string;
+  geoCoords: object;
   name: string;
-  services: string;
+  services: object;
   description: string;
   email: string;
   zip: string;
@@ -48,9 +48,9 @@ export default defineEventHandler(async (event): Promise<ResponseBody> => {
 
     // Crear el objeto de la empresa
     const company: Company = {
-      geoCoords: JSON.stringify(geoCoords),
+      geoCoords: (geoCoords),
       name,
-      services: JSON.stringify(filteredServices), // Almacenar como JSON en la base de datos
+      services: (filteredServices), // Almacenar como JSON en la base de datos
       description,
       email,
       zip: postalCode
