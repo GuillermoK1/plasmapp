@@ -12,7 +12,7 @@ type QueryParams = {
 interface Company {
     geoCoords: {lat: number, lng: number};
     name: string;
-    services: object;
+    services: string;
     description: string;
     email: string;
     zip: string;

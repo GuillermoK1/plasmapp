@@ -20,9 +20,9 @@
 <script setup lang="ts">
 
 interface Company {
-    geoCoords: string;
+    geoCoords: object;
     name: string;
-    services: string;
+    services: object;
     description: string;
     email: string;
     zip: string;
