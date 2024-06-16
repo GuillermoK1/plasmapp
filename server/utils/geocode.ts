@@ -19,6 +19,6 @@ export const geocode = async (postalCode: string): Promise<{ lat: number; lng: n
         const location = response.data.results[0].geometry.location;
         return { lat: location.lat, lng: location.lng };
     } else {
-        throw new Error('Error al obtener las coordenadas geográficas');
+        throw new Error('Código postal inválido.');
     }
 };

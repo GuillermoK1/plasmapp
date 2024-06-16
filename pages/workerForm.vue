@@ -53,9 +53,13 @@ const handleServices = (services: Record<string, boolean>) => {
 const submitForm = async () => {
   try {
     const response = await axios.post('/api/companies/create', formData.value);
-    success.value = true;
-    message.value = 'Formulario enviado con éxito';
-    console.log('Server response:', response.data);
+    if (response.data.success) {
+      success.value = true;
+      message.value = 'Formulario enviado con éxito';
+    } else {
+      success.value = false;
+      message.value = `Error al enviar el formulario: ${response.data.error}`;
+    }
   } catch (error) {
     success.value = false;
     message.value = 'Error al enviar el formulario';
