@@ -55,15 +55,15 @@ const submitForm = async () => {
     const response = await axios.post('/api/companies/create', formData.value);
     if (response.data.success) {
       success.value = true;
-      message.value = 'Formulario enviado con éxito';
+      message.value = ' Formulario enviado con éxito. ';
     } else {
       success.value = false;
-      message.value = `Error al enviar el formulario: ${response.data.error}`;
+      message.value = ` Error al enviar el formulario: ${response.data.error}`;
     }
   } catch (error) {
     success.value = false;
-    message.value = 'Error al enviar el formulario';
-    console.error('Error submitting form:', error);
+    message.value = ' Error al enviar el formulario ';
+    console.error(' Error submitting form: ', error);
   }
 };
 </script>
@@ -93,9 +93,11 @@ const submitForm = async () => {
 
 .success-message {
   color: green;
+  background-color: aliceblue;
 }
 
 .error-message {
   color: red;
+  background-color: aliceblue;
 }
 </style>
