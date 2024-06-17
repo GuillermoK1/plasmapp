@@ -27,7 +27,7 @@ watch(zipCode, (newValue) => {
 </script>
 
 <template>
-  <h2 class="m-2 p-2 font-bold text-neutral-800 bg-gradient-to-r from-sky-700 to-indigo-600 z-10 opacity-85">Introduce tu código postal</h2>
+  <h2 class="m-2 p-2 font-bold text-neutral-800 bg-gradient-to-r from-sky-700 to-indigo-600 z-10 opacity-85">Introduce tu código postal.</h2>
   <input 
     v-model="zipCode" 
     @input="validateInput" 
